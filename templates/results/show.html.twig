@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <a href="{{ path('get_test') }}" class="btn btn-primary">Back to Test</a>
+        <a href="{{ path('get_results') }}" class="btn btn-primary">Back to Results</a>
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Your Result</h2>
+                {% for resultItem in resultData %}
+                    <div class="card m-3 w-50 {% if resultItem.isAnswerRight %} border-success {% else %} border-danger {% endif %}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ resultItem.question.text }}</h5>
+
+                            {% for option in resultItem.options %}
+                                {{ option.text }}
+                                <input type="checkbox"
+                                       {% if option.id in resultItem.selectedOptionIds %}checked{% endif %} disabled>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-sm-6">
+                <h2>Answers</h2>
+                {% for question in questions %}
+                    <div class="card m-3 w-50">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ question.text }}</h5>
+                            {% for option in question.options %}
+                                {{ option.text }}
+                                <input type="checkbox" {% if option.isCorrect %} checked {% endif %} disabled>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

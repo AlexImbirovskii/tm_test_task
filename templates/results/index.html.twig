@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Results List</h1>
+        <a href="{{ path('get_test') }}" class="btn btn-primary">Back to Test</a>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Results</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for result in pagination.items %}
+                <tr>
+                    <td><a href="{{ path('show_result', {id: result.id}) }}" class="btn btn-info btn-sm">Result {{ result.id }}</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+{% endblock %}
+

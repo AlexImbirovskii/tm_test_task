@@ -1,0 +1,17 @@
+.idea
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+.env
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+tests/_data/*
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
